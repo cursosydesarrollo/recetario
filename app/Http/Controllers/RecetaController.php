@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Receta;
+use App\User;
+use Illuminate\Contracts\Cache\Store;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class RecetaController extends Controller
 {
@@ -27,7 +31,8 @@ class RecetaController extends Controller
      */
     public function create()
     {
-        //
+        $usuarios = User::pluck('name', 'id');
+        return view('recetas.create', compact('usuarios'));
     }
 
     /**
@@ -38,7 +43,26 @@ class RecetaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nombre' => 'required|string|unique:recetas',
+            'descripcion' => 'required|max:300|string',
+            'imagen' => 'image|mimes:jpeg,png,jpg|max:2048'
+        ]);
+        
+        if($request->has('imagen')){
+            $file = $request->file('imagen');
+            $fileName = 'receta-'.time().'.'.$file->getClientOriginalExtension();
+            $path = $file->storeAs('recetas', $fileName);
+            Storage::disk('local')->put($file, 'Contents');
+            // ln -s /home/public_html/storage/app/public /home/dev5/public_html/public/storage
+            $dbPath = Storage::url($path);
+            $request['image_url'] = $dbPath;
+        }
+
+        $request['user_id'] = 1;  
+        $receta = Receta::create($request->all());
+
+        return redirect()->to('/recetas');
     }
 
     /**
