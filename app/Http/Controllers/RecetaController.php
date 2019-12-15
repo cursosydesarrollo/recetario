@@ -90,7 +90,7 @@ class RecetaController extends Controller
      */
     public function edit(Receta $receta)
     {
-        return $receta;
+        return view('recetas.edit', compact('receta'));
     }
 
     /**
@@ -102,7 +102,23 @@ class RecetaController extends Controller
      */
     public function update(Request $request, Receta $receta)
     {
-        //
+        $request->validate([
+            'nombre' => 'required|string',
+            'descripcion' => 'required|string',
+            'imagen' => 'image|mimes:jpeg,png,jpg|max:2048|nullable'
+        ]);
+
+        if($request->get('imagen') != null){
+            $file = $request->file('imagen');
+            $fileName = 'receta-'.time().'.'.$file->getClientOriginalExtension();
+            $path = $file->storeAs('recetas', $fileName);
+            // ln -s /var/www/storage/app /var/www/public/storage
+            $dbPath = Storage::url($path);
+            $request['imagen_url'] = $dbPath;
+        }
+
+        $receta->update($request->all());
+        return redirect()->to('/recetas/' . $receta->id);        
     }
 
     /**
