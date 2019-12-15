@@ -53,12 +53,12 @@ class RecetaController extends Controller
             $file = $request->file('imagen');
             $fileName = 'receta-'.time().'.'.$file->getClientOriginalExtension();
             $path = $file->storeAs('recetas', $fileName);
-            Storage::disk('local')->put($file, 'Contents');
+            //Storage::disk('local')->put($file, 'Contents');
             // ln -s /home/public_html/storage/app/public /home/dev5/public_html/public/storage
             $dbPath = Storage::url($path);
-            $request['image_url'] = $dbPath;
         }
-
+        
+        $request['imagen_url'] = $dbPath;
         $request['user_id'] = 1;  
         $receta = Receta::create($request->all());
 
