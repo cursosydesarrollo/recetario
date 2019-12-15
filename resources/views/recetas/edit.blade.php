@@ -9,7 +9,8 @@
     </div>
     <div class="row">
         <div class="col-md">
-            {!! Form::model($receta, ['method' => 'PATCH', 'route' => ['recetas.update', $receta->id]]) !!}
+            {!! Form::model($receta, ['method' => 'PATCH', 
+                'route' => ['recetas.update', $receta->id], 'files' => true]) !!}
             @include('recetas._form')
             {!! Form::close() !!}
         </div>

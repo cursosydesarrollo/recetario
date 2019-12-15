@@ -107,8 +107,8 @@ class RecetaController extends Controller
             'descripcion' => 'required|string',
             'imagen' => 'image|mimes:jpeg,png,jpg|max:2048|nullable'
         ]);
-
-        if($request->get('imagen') != null){
+        
+        if($request->has('imagen')){
             $file = $request->file('imagen');
             $fileName = 'receta-'.time().'.'.$file->getClientOriginalExtension();
             $path = $file->storeAs('recetas', $fileName);
@@ -129,6 +129,8 @@ class RecetaController extends Controller
      */
     public function destroy(Receta $receta)
     {
-        //
+        if($receta->delete()){
+            return redirect()->to('/recetas');
+        }
     }
 }
