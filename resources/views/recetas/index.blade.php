@@ -1,5 +1,16 @@
 @extends('layouts.app')
 
+@section('breadcrumb')
+<nav aria-label="breadcrumb">
+    <div class="container">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item" aria-current="page"><a href="/">Inicio</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Recetas</li>
+        </ol>
+    </div>
+</nav>
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row">
@@ -17,7 +28,9 @@
             <div class="list-group">
                 @foreach ($items as $item)
                 {{-- TODO: links --}}
-                <a href="/recetas/{{ $item->id }}" class="list-group-item list-group-item-action flex-column align-items-start" style="margin-bottom:10px">
+                <a href="/recetas/{{ $item->id }}"
+                    class="list-group-item list-group-item-action flex-column align-items-start"
+                    style="margin-bottom:10px">
                     <div class="d-flex w-100 justify-content-between">
                         <h5 class="mb-1">{{ $item->nombre }}</h5>
                         <small>{{ $item->updated_at->diffForHumans() }}</small>

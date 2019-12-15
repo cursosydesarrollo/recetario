@@ -1,5 +1,17 @@
 @extends('layouts.app')
 
+@section('breadcrumb')
+<nav aria-label="breadcrumb">
+    <div class="container">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item" aria-current="page"><a href="/">Inicio</a></li>
+            <li class="breadcrumb-item" aria-current="page"><a href="/recetas">Recetas</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{  $receta->nombre }}</li>
+        </ol>
+    </div>
+</nav>
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center ">

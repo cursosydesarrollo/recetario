@@ -16,9 +16,14 @@
 <div class="form-group">
     <label for="descripcion">Imagen</label>
     {!! Form::file('imagen', null, ['class' => 'form-control']) !!}
-    <div>{{  $receta->imagen_url }}</div>
+    <div>{{  isset($receta) ? $receta->imagen_url : '' }}</div>
 </div>
 
 <div class="form-group">
-    {!! Form::submit('Upload File', ['class' => 'btn btn-primary']) !!}
+    @if (isset($edicion))
+    {!! Form::submit('Editar', ['class' => 'btn btn-primary']) !!}    
+    @else
+    {!! Form::submit('Crear', ['class' => 'btn btn-primary']) !!}
+    @endif
+
 </div>
