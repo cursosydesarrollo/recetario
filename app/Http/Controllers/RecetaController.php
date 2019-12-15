@@ -31,8 +31,7 @@ class RecetaController extends Controller
      */
     public function create()
     {
-        $usuarios = User::pluck('name', 'id');
-        return view('recetas.create', compact('usuarios'));
+        return view('recetas.create');
     }
 
     /**
@@ -57,7 +56,7 @@ class RecetaController extends Controller
             // ln -s /home/public_html/storage/app/public /home/dev5/public_html/public/storage
             $dbPath = Storage::url($path);
         }
-        
+
         $request['imagen_url'] = $dbPath;
         $request['user_id'] = 1;  
         $receta = Receta::create($request->all());
