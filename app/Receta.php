@@ -9,9 +9,21 @@ class Receta extends Model
 {
 
     use SoftDeletes;
-    
+
+    /**
+     * protección de asignación masiva
+     *
+     * @var array
+     */
     protected $fillable = ['nombre', 'descripcion', 'user_id', 'imagen_url'];    
     
+    /**
+     * Campos escondidos de entidad
+     *
+     * @var array
+     */
+    protected $hidden = ['deleted_at'];
+
     /**
      * Relacion a usuarios
      *

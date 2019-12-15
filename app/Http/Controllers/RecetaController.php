@@ -28,6 +28,8 @@ class RecetaController extends Controller
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
+     * 
+     * /recentas/create
      */
     public function create()
     {
@@ -39,12 +41,14 @@ class RecetaController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
+     * 
+     * @post /recentas/
      */
     public function store(Request $request)
     {
         $request->validate([
             'nombre' => 'required|string|unique:recetas',
-            'descripcion' => 'required|max:300|string',
+            'descripcion' => 'required|string',
             'imagen' => 'image|mimes:jpeg,png,jpg|max:2048'
         ]);
         
@@ -65,25 +69,28 @@ class RecetaController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * @get /recetas/{receta}
      *
      * @param  \App\Receta  $receta
      * @return \Illuminate\Http\Response
      */
     public function show(Receta $receta)
     {
-        //
+        //return $receta;
+        return view('recetas.show', compact('receta'));
     }
 
     /**
      * Show the form for editing the specified resource.
-     *
+     * 
+     * @get /recetas/{receta}/edit
+     * 
      * @param  \App\Receta  $receta
      * @return \Illuminate\Http\Response
      */
     public function edit(Receta $receta)
     {
-        //
+        return $receta;
     }
 
     /**

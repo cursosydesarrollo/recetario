@@ -12,6 +12,7 @@
     <div class="row">
         
         <div class="col-md">
+            {{-- TODO: links --}}
             {!! Form::open(['url' => '/recetas', 'method' => 'POST' ,'files'=>'true']) !!}
 
             <div class="form-group">
