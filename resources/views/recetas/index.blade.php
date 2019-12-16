@@ -13,14 +13,20 @@
 
 @section('content')
 <div class="container">
+   
     <div class="row">
         <div class="col-md-12 d-flex">
             <h3>Recetas</h3>
+
+            @if (Auth::user())
             <a type="button" href="/recetas/create" class="btn btn-primary ml-auto">
                 <i class="fas fa-plus"></i> Crear Receta
             </a>
+            @endif
+            
         </div>
     </div>
+    
 
     <div class="row">
         <div class="col-md-12">

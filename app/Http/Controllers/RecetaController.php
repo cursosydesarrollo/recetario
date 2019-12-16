@@ -12,6 +12,14 @@ use Illuminate\Support\Facades\Storage;
 class RecetaController extends Controller
 {
     /**
+     * funcion __contruct
+     */
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['index', 'show']);
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
