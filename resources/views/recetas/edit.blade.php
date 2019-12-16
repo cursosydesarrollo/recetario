@@ -5,9 +5,9 @@
 <nav aria-label="breadcrumb">
     <div class="container">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item" aria-current="page"><a href="/">Inicio</a></li>
-            <li class="breadcrumb-item" aria-current="page"><a href="/recetas">Recetas</a></li>
-            <li class="breadcrumb-item" aria-current="page"><a href="/recetas/{{ $receta->id }}">{{ $receta->nombre }}</a></li>
+            <li class="breadcrumb-item" aria-current="page"><a href="{{ route('home') }}">Inicio</a></li>
+            <li class="breadcrumb-item" aria-current="page"><a href="{{ route('recetas.index') }}">Recetas</a></li>
+            <li class="breadcrumb-item" aria-current="page"><a href="{{ route('recetas.edit', $receta->id) }}">{{ $receta->nombre }}</a></li>
             <li class="breadcrumb-item active" aria-current="page">edición</li>
         </ol>
     </div>

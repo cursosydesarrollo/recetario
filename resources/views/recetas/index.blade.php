@@ -13,14 +13,20 @@
 
 @section('content')
 <div class="container">
+   
     <div class="row">
         <div class="col-md-12 d-flex">
             <h3>Recetas</h3>
-            <a type="button" href="/recetas/create" class="btn btn-primary ml-auto">
+
+            @if (Auth::user())
+            <a type="button" href="{{ route('recetas.create') }}" class="btn btn-primary ml-auto">
                 <i class="fas fa-plus"></i> Crear Receta
             </a>
+            @endif
+            
         </div>
     </div>
+    
 
     <div class="row">
         <div class="col-md-12">
@@ -28,7 +34,7 @@
             <div class="list-group">
                 @foreach ($items as $item)
                 {{-- TODO: links --}}
-                <a href="/recetas/{{ $item->id }}"
+                <a href="{{ route('recetas.show', $item->id) }}"
                     class="list-group-item list-group-item-action flex-column align-items-start"
                     style="margin-bottom:10px">
                     <div class="d-flex w-100 justify-content-between">

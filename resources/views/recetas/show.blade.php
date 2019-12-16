@@ -23,14 +23,20 @@
                     <p class="card-text">{{ $receta->descripcion }}</p>
                     {{-- TODO: links --}}
                     
-                    <a href="/recetas/{{ $receta->id }}/edit" class="btn btn-warning card-link">Editar</a>
+                    @if (Auth::user())
+                    <a href="/recetas/{{ $receta->id }}/edit" class="btn btn-warning card-link">Editar</a>                        
+                    @endif
+
+                    
                     <a href="#" class="btn btn-primary">Recetas de usuario {{  $receta->usuario->name }}</a>
 
+                    @if (Auth::user())
                     <form action="/recetas/{{ $receta->id }}" method="POST" style="display:inline">
                         @method('DELETE')
                         @csrf
                         <button type="submit" class="btn btn-danger text-aling-rigth" style="float: right;">Eliminar receta</a>
                     </form>
+                    @endif
                     
                 </div>
             </div>
