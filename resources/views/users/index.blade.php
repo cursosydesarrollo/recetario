@@ -16,7 +16,7 @@
 
     <div class="row">
         <div class="col-md-12 d-flex">
-            <h3>Recetas</h3>
+            <h3>Usuarios</h3>
 
             @if (Auth::user())
             <a type="button" href="{{ route('usuarios.create') }}" class="btn btn-primary ml-auto">

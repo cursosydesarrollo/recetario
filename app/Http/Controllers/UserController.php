@@ -13,7 +13,9 @@ class UserController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('verified');   
+        //$this->middleware(['role:administrador','permission:editar usuarios']);
     }
+    
     /**
      * Display a listing of the resource.
      *
