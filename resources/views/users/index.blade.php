@@ -29,6 +29,7 @@
 
     <div class="row">
         <div class="col-md">
+            <br />
             <table class="table table-bordered" id="laravel_datatable">
                 <thead>
                     <tr>
