@@ -21,6 +21,14 @@ class UserDtController extends Controller
     {
         $builder = User::query()->select('id', 'name', 'email', 'updated_at');
 
-        return dataTables::of($builder)->make(true);
+        return dataTables::of($builder)
+        ->addColumn('actions', function ($name) {
+            return '
+            <a class="" href="usuarios/' . $name->id . '"><i class="fas fa-eye"></i> Ver</a> | 
+            <a class="" href="usuarios/' . $name->id . '/edit"><i class="fas fa-edit"></i> Editar</a>
+            ';
+        })
+        ->rawColumns(['actions'])
+        ->make(true);
     }
 }

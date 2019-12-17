@@ -8,7 +8,8 @@ $(document).ready( function () {
         { data: 'id', name: 'id' },
         { data: 'name', name: 'name' },
         { data: 'email', name: 'email' },
-        { data: 'updated_at', name: 'updated_at' }
+        { data: 'updated_at', name: 'updated_at' },
+        { data: 'actions', name: 'actions' }
         ]
     });
 });

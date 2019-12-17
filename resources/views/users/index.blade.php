@@ -35,7 +35,8 @@
                         <th>Id</th>
                         <th>Name</th>
                         <th>Email</th>
-                        <th>updated at</th>
+                        <th>Updated At</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
             </table>

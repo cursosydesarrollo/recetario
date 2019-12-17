@@ -57452,6 +57452,9 @@ $(document).ready(function () {
     }, {
       data: 'updated_at',
       name: 'updated_at'
+    }, {
+      data: 'actions',
+      name: 'actions'
     }]
   });
 });
