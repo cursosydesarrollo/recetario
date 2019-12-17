@@ -17,6 +17,13 @@ class UserDtController extends Controller
         $this->middleware('verified');   
     }
 
+    /**
+     * Listado de Usuarios
+     *
+     * @return void
+     * 
+     * @get /users-list
+     */
     public function index()
     {
         $builder = User::query()->select('id', 'name', 'email', 'updated_at');

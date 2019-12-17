@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -17,6 +18,8 @@ class UserController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
+     * 
+     * @get /usuarios
      */
     public function index()
     {
@@ -30,7 +33,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('users.create');
     }
 
     /**
@@ -41,7 +44,22 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        
+
+        if ($request->input('password')):
+            $request['password'] = bcrypt($request->input('password'));
+            unset($request['password-confirm']);
+        else:
+            unset($request['password']);
+            unset($request['password-confirm']);
+        endif;
+
+        $request['email_verified_at'] = Carbon::now()->format('Y-m-d H:i:s');
+
+        User::create($request->all());
+
+        return redirect()->to('/usuarios');
     }
 
     /**
