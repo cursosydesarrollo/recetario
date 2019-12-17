@@ -55,6 +55,8 @@ class RecetaController extends Controller
      */
     public function store(Request $request)
     {
+        // Metodo Gordo
+        
         $request->validate([
             'nombre' => 'required|string|unique:recetas',
             'descripcion' => 'required|string',

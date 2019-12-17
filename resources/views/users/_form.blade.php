@@ -1,21 +1,32 @@
 <div class="form-group">
     <label for="nombre">Nombre Completo</label>
-    {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Nombre Completo']) !!}
-    <small class="form-text text-muted">
-        else.</small>
+    {!! Form::text('name', null, ['class' => 'form-control ' . ($errors->has('name') ? ' is-invalid' : ''), 'placeholder' => 'Nombre Completo']) !!}
+    @error('name')
+    <span class="invalid-feedback" role="alert">
+        <strong>{{ $message }}</strong>
+    </span>
+    @enderror
 </div>
 
 <div class="form-group">
     <label for="nombre">Correo Electronico</label>
-    {!! Form::email('email', null, ['class' => 'form-control', 'placeholder' => 'Correo Electronico']) !!}
-    <small class="form-text text-muted">We'll never share your email with anyone
-        else.</small>
+
+    {!! Form::email('email', null, ['class' => 'form-control ' . ($errors->has('email') ? ' is-invalid' : '') , 'placeholder' => 'Correo Electronico']) !!}
+    @error('email')
+        <span class="invalid-feedback" role="alert">
+            <strong>{{ $message }}</strong>
+        </span>
+    @enderror
 </div>
 
 <div class="form-group">
     <label for="password">Contraseña</label>
-    {!! Form::password('password', ['class' => 'form-control']) !!}
-
+    {!! Form::password('password', ['class' => "form-control " . ($errors->has('password') ? ' is-invalid' : '')]) !!}
+    @error('password')
+    <span class="invalid-feedback" role="alert">
+        <strong>{{ $message }}</strong>
+    </span>
+    @enderror
 </div>
 
 <div class="form-group">

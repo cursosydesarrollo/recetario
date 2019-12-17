@@ -26,7 +26,8 @@ class UserDtController extends Controller
      */
     public function index()
     {
-        $builder = User::query()->select('id', 'name', 'email', 'updated_at');
+        $builder = User::query()->select('id', 'name', 'email', 'updated_at')
+            ->where('deleted_at', null);
 
         return dataTables::of($builder)
         ->addColumn('actions', function ($name) {

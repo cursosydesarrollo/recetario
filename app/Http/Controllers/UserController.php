@@ -44,8 +44,13 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        // Metodo Gordo
 
-        
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);        
 
         if ($request->input('password')):
             $request['password'] = bcrypt($request->input('password'));
@@ -68,7 +73,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $usuario)
     {
         //
     }
@@ -79,9 +84,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $usuario)
     {
-        //
+        return view('users.edit', compact('usuario'));    
     }
 
     /**
@@ -91,9 +96,26 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $usuario)
     {
-        //
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $usuario->id],
+            'password' => ['string', 'min:8', 'confirmed', 'nullable']
+        ]);        
+
+        if ($request->input('password')):
+            $request['password'] = bcrypt($request->input('password'));
+            unset($request['password-confirm']);
+        else:
+            unset($request['password']);
+            unset($request['password-confirm']);
+        endif;
+
+        $usuario->update($request->all());
+        
+        return redirect()->to('/usuarios');
+
     }
 
     /**

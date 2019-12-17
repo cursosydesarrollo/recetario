@@ -6,7 +6,7 @@
         <ol class="breadcrumb">
             <li class="breadcrumb-item" aria-current="page"><a href="{{ route('home') }}">Inicio</a></li>
             <li class="breadcrumb-item" aria-current="page"><a href="{{ route('usuarios.index') }}">Usuarios</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Agregar usuario</li>
+            <li class="breadcrumb-item active" aria-current="page">Editar usuario</li>
         </ol>
     </div>
 </nav>
@@ -17,7 +17,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md">
-            {!! Form::open(['url' => [route('usuarios.store')], 'method' => 'POST' ,'files'=>'true']) !!}
+            {!! Form::model($usuario, ['method' => 'PATCH', 'route' => ['usuarios.update', $usuario->id]]) !!}
             @include('users._form')
             {!! Form::close() !!}
         </div>
