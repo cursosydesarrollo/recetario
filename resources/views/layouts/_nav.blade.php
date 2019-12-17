@@ -36,7 +36,7 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a href="{{ route('users') }}" class="dropdown-item">{{  __('Usuarios') }}</a> 
+                                <a href="{{ route('usuarios.index') }}" class="dropdown-item">{{  __('Usuarios') }}</a> 
                             </div>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
