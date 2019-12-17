@@ -17,6 +17,15 @@
 <div class="container">
     <div class="row">
         <div class="col-md">
+            <form action="{{ route('usuarios.destroy', $usuario->id) }}" method="POST" style="display:inline">
+                @method('DELETE')
+                @csrf
+                <button type="submit" class="btn btn-danger text-aling-rigth" style="float: right;">Cancelar Usuario</a>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md">
             {!! Form::model($usuario, ['method' => 'PATCH', 'route' => ['usuarios.update', $usuario->id]]) !!}
             @include('users._form')
             {!! Form::close() !!}

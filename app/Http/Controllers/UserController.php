@@ -115,7 +115,6 @@ class UserController extends Controller
         $usuario->update($request->all());
         
         return redirect()->to('/usuarios');
-
     }
 
     /**
@@ -124,8 +123,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $usuario)
     {
-        //
+        if($usuario->delete()){
+            return redirect()->to('/usuarios');
+        }
     }
 }
