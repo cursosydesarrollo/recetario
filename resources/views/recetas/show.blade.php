@@ -22,22 +22,21 @@
                     <h5 class="card-title">{{ $receta->nombre }}</h5>
                     <p class="card-text">{{ $receta->descripcion }}</p>
                     {{-- TODO: links --}}
-                    
-                    @if (Auth::user())
-                    <a href="/recetas/{{ $receta->id }}/edit" class="btn btn-warning card-link">Editar</a>                        
-                    @endif
 
-                    
+                    @can('editar recetas')
+                    <a href="{{ route('recetas.edit', $receta->id) }}" class="btn btn-warning card-link">Editar</a>
+                    @endcan
+
                     <a href="#" class="btn btn-primary">Recetas de usuario {{  $receta->usuario->name }}</a>
 
-                    @if (Auth::user())
-                    <form action="/recetas/{{ $receta->id }}" method="POST" style="display:inline">
+                    @can('eliminar recetas')
+                    <form action="{{ route('recetas.destroy', $receta->id) }}" method="POST" style="display:inline">
                         @method('DELETE')
                         @csrf
-                        <button type="submit" class="btn btn-danger text-aling-rigth" style="float: right;">Eliminar receta</a>
+                        <button type="submit" class="btn btn-danger text-aling-rigth" style="float: right;">Eliminar
+                            receta</a>
                     </form>
-                    @endif
-                    
+                    @endcan
                 </div>
             </div>
         </div>

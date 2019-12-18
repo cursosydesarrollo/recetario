@@ -18,6 +18,8 @@ class RecetaController extends Controller
     {
         $this->middleware('auth')->except(['index', 'show']);
         $this->middleware('verified')->except(['index', 'show']);
+        $this->middleware(['role:administrador','permission:editar recetas'])->only(['edit', 'update']);
+        $this->middleware(['role:administrador','permission:eliminar recetas'])->only(['destroy']);
     }
 
     /**

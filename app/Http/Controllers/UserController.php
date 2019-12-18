@@ -13,9 +13,13 @@ class UserController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('verified');   
-        //$this->middleware(['role:administrador','permission:editar usuarios']);
+        $this->middleware(['role:administrador','permission:ver usuarios'])->only(['show', 'index']);
+        $this->middleware(['role:administrador','permission:crear usuarios'])->only(['create', 'store']);
+        $this->middleware(['role:administrador','permission:editar usuarios'])->only(['edit', 'update']);
+        $this->middleware(['role:administrador','permission:suspender usuarios'])->only(['destroy']);
+        
     }
-    
+
     /**
      * Display a listing of the resource.
      *
