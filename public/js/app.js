@@ -57452,7 +57452,8 @@ $(document).ready(function () {
       name: 'users.email'
     }, {
       data: 'rname',
-      name: 'rname'
+      name: 'roles.name',
+      "defaultContent": "<i>Not set</i>"
     }, {
       data: 'updated_at',
       name: 'users.updated_at'
