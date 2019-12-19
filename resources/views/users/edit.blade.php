@@ -16,14 +16,16 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md">
-            <form action="{{ route('usuarios.destroy', $usuario->id) }}" method="POST" style="display:inline">
+            <div class="col-md-12 d-flex">
+            <h3>{{ $usuario->name }}</h3>
+            <form class="ml-auto" action="{{ route('usuarios.destroy', $usuario->id) }}" method="POST" style="display:inline">
                 @method('DELETE')
                 @csrf
                 <button type="submit" class="btn btn-danger text-aling-rigth" style="float: right;">Cancelar Usuario</a>
             </form>
         </div>
     </div>
+    
     <div class="row">
         <div class="col-md">
             {!! Form::model($usuario, ['method' => 'PATCH', 'route' => ['usuarios.update', $usuario->id]]) !!}

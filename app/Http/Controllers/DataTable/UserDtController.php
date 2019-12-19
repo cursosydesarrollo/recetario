@@ -27,16 +27,25 @@ class UserDtController extends Controller
      */
     public function index()
     {
-        $builder = User::query()->select('id', 'name', 'email', 'updated_at')->where('deleted_at','=', null);
+        /***
+        $builder = User::query()->select('users.id', 'users.name', 'users.email', 'users.updated_at')
+        ->leftJoin('model_has_roles', 'model_has_roles.model_id', '=', 'users.id')
+        ->where('users.deleted_at','=', null)
+        ->orderBy('users.id', 'DESC');*/
+
+        $builder = DB::table('users')->select('users.id', 'users.name', 'users.email', 'users.updated_at', 'roles.name as rname')
+        ->leftJoin('model_has_roles', 'model_has_roles.model_id', '=', 'users.id')
+        ->leftJoin('roles', 'model_has_roles.role_id', 'roles.id')
+        ->where('users.deleted_at','=', null)
+        ->orderBy('users.id', 'DESC');
 
         return dataTables::of($builder)
         ->addColumn('actions', function ($name) {
             return '
             <a class="" href="usuarios/' . $name->id . '"><i class="fas fa-eye"></i> Ver</a> | 
-            <a class="" href="usuarios/' . $name->id . '/edit"><i class="fas fa-edit"></i> Editar</a>
-            ';
+            <a class="" href="usuarios/' . $name->id . '/edit"><i class="fas fa-edit"></i> Editar</a>';
         })
         ->rawColumns(['actions'])
-        ->make(true);
+        ->make();
     }
 }

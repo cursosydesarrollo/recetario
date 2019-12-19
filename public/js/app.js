@@ -57440,18 +57440,22 @@ $(document).ready(function () {
     processing: true,
     serverSide: true,
     ajax: "/users-list",
+    "order": [[0, "desc"]],
     columns: [{
       data: 'id',
-      name: 'id'
+      name: 'users.id'
     }, {
       data: 'name',
-      name: 'name'
+      name: 'users.name'
     }, {
       data: 'email',
-      name: 'email'
+      name: 'users.email'
+    }, {
+      data: 'rname',
+      name: 'rname'
     }, {
       data: 'updated_at',
-      name: 'updated_at'
+      name: 'users.updated_at'
     }, {
       data: 'actions',
       name: 'actions'

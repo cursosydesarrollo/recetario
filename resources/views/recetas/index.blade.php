@@ -19,7 +19,7 @@
             <h3>Recetas</h3>
 
             @can('crear recetas')
-            <a type="button" href="{{ route('recetas.create') }}" class="btn btn-primary ml-auto">
+            <a href="{{ route('recetas.create') }}" class="btn btn-primary ml-auto">
                 <i class="fas fa-plus"></i> Crear Receta
             </a>
             @endcan

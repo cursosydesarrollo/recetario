@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -92,7 +93,9 @@ class UserController extends Controller
      */
     public function edit(User $usuario)
     {
-        return view('users.edit', compact('usuario'));    
+
+        $roles = Role::all()->pluck('name', 'id');
+        return view('users.edit', compact('usuario', 'roles'));    
     }
 
     /**
@@ -104,6 +107,7 @@ class UserController extends Controller
      */
     public function update(Request $request, User $usuario)
     {
+  
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $usuario->id],
@@ -119,7 +123,9 @@ class UserController extends Controller
         endif;
 
         $usuario->update($request->all());
-        
+
+        $usuario->syncRoles([$request->get('roles')]);
+
         return redirect()->to('/usuarios');
     }
 

@@ -36,6 +36,7 @@
                         <th>Id</th>
                         <th>Name</th>
                         <th>Email</th>
+                        <th>Roles</th>
                         <th>Updated At</th>
                         <th>Acciones</th>
                     </tr>
