@@ -24,3 +24,5 @@ Route::resource('recetas', 'RecetaController');
 Route::resource('usuarios', 'UserController');
 
 Route::get('users-list', 'DataTable\UserDtController@index');
+
+Route::resource('roles', 'RolesController')->only(['index']);

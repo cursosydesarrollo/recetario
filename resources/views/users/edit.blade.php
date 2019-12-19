@@ -29,7 +29,7 @@
     <div class="row">
         <div class="col-md">
             {!! Form::model($usuario, ['method' => 'PATCH', 'route' => ['usuarios.update', $usuario->id]]) !!}
-            @include('users._form')
+            @include('users._form', array('edicion' => true))
             {!! Form::close() !!}
         </div>
     </div>

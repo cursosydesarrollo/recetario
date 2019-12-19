@@ -27,12 +27,6 @@ class UserDtController extends Controller
      */
     public function index()
     {
-        /***
-        $builder = User::query()->select('users.id', 'users.name', 'users.email', 'users.updated_at')
-        ->leftJoin('model_has_roles', 'model_has_roles.model_id', '=', 'users.id')
-        ->where('users.deleted_at','=', null)
-        ->orderBy('users.id', 'DESC');*/
-
         $builder = DB::table('users')->select('users.id', 'users.name', 'users.email', 'users.updated_at', 'roles.name as rname')
         ->leftJoin('model_has_roles', 'model_has_roles.model_id', '=', 'users.id')
         ->leftJoin('roles', 'model_has_roles.role_id', 'roles.id')

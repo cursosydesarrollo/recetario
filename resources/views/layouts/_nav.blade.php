@@ -42,6 +42,12 @@
                         <a href="{{ route('usuarios.index') }}" class="dropdown-item">{{  __('Usuarios') }}</a>
                         @endcan
 
+                        <div class="diver"></div>
+
+                        @can('ver roles')
+                        <a href="{{ route('roles.index') }}" class="dropdown-item">{{  __('Roles') }}</a>
+                        @endcan
+
                         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                               document.getElementById('logout-form').submit();">
                             {{ __('Logout') }}
