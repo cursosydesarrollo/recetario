@@ -108,7 +108,7 @@ class UserController extends Controller
      */
     public function update(Request $request, User $usuario)
     {
-  
+        //dd($request->all());
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $usuario->id],
@@ -117,10 +117,10 @@ class UserController extends Controller
 
         if ($request->input('password')):
             $request['password'] = bcrypt($request->input('password'));
-            unset($request['password-confirm']);
+            unset($request['password_confirmation']);
         else:
             unset($request['password']);
-            unset($request['password-confirm']);
+            unset($request['password_confirmation']);
         endif;
 
         $usuario->update($request->all());

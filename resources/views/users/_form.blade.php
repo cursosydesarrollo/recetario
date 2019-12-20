@@ -33,7 +33,7 @@
 
 <div class="form-group">
     <label for="password-confirm">Confirmar contraseña</label>
-    {!! Form::password('password-confirm', ['class' => 'form-control']) !!}
+    {!! Form::password('password_confirmation', ['class' => 'form-control']) !!}
 </div>
 
 <div class="form-group">
