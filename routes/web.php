@@ -26,3 +26,6 @@ Route::resource('usuarios', 'UserController');
 Route::get('users-list', 'DataTable\UserDtController@index');
 
 Route::resource('roles', 'RolesController')->only(['index']);
+
+// conseguir lista de permisos
+Route::middleware('api')->get('permissions', 'Api\PermissionController@index');

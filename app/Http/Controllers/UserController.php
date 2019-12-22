@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Roles;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission;
-use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -31,6 +31,7 @@ class UserController extends Controller
      */
     public function index()
     {
+    
         return view('users.index');
     }
 
@@ -41,7 +42,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('users.create');
+        $roles = Roles::all()->pluck('name', 'id');
+        return view('users.create', compact('roles'));
     }
 
     /**
@@ -95,7 +97,7 @@ class UserController extends Controller
     public function edit(User $usuario)
     {
 
-        $roles = Role::all()->pluck('name', 'id');
+        $roles = Roles::all()->pluck('name', 'id');
         return view('users.edit', compact('usuario', 'roles'));    
     }
 

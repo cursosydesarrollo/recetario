@@ -57367,7 +57367,7 @@ module.exports = function(module) {
  */
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
-__webpack_require__(/*! ./dataTable */ "./resources/js/dataTable.js");
+__webpack_require__(/*! ./jquery */ "./resources/js/jquery/index.js");
 
 /***/ }),
 
@@ -57428,10 +57428,38 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /***/ }),
 
-/***/ "./resources/js/dataTable.js":
-/*!***********************************!*\
-  !*** ./resources/js/dataTable.js ***!
-  \***********************************/
+/***/ "./resources/js/jquery/index.js":
+/*!**************************************!*\
+  !*** ./resources/js/jquery/index.js ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(/*! ./usuarios */ "./resources/js/jquery/usuarios/index.js");
+
+/***/ }),
+
+/***/ "./resources/js/jquery/usuarios/PermissionRequest.js":
+/*!***********************************************************!*\
+  !*** ./resources/js/jquery/usuarios/PermissionRequest.js ***!
+  \***********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+$(document).ready(function () {
+  $('.roles-get').on('click', function (e) {
+    e.preventDefault();
+    var url = $(this).attr('href');
+    alert(url);
+  });
+});
+
+/***/ }),
+
+/***/ "./resources/js/jquery/usuarios/UsuariosDt.js":
+/*!****************************************************!*\
+  !*** ./resources/js/jquery/usuarios/UsuariosDt.js ***!
+  \****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -57463,6 +57491,19 @@ $(document).ready(function () {
     }]
   });
 });
+
+/***/ }),
+
+/***/ "./resources/js/jquery/usuarios/index.js":
+/*!***********************************************!*\
+  !*** ./resources/js/jquery/usuarios/index.js ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(/*! ./UsuariosDt */ "./resources/js/jquery/usuarios/UsuariosDt.js");
+
+__webpack_require__(/*! ./PermissionRequest */ "./resources/js/jquery/usuarios/PermissionRequest.js");
 
 /***/ }),
 

@@ -13,6 +13,5 @@ $(document).ready( function () {
         { data: 'updated_at', name: 'users.updated_at' },
         { data: 'actions', name: 'actions' }
         ]
-
     });
 });

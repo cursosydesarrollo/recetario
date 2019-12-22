@@ -21,7 +21,7 @@ class RolesController extends Controller
         $roles = Roles::paginate();
         return view('roles.index', compact('roles'));
     }
-
+    
 
     public function edit(Roles $role)
     {
