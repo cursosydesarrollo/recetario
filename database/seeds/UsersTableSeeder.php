@@ -12,6 +12,11 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(User::class)->create(['email' => 'gbelot@test.com']);
+        // creamos al usuario
+        $user = factory(User::class)->create(['email' => 'gbelot@test.com']);
+        
+        // Le asignamos el rol de administrador
+        $user->assignRole('administrador');
+
     }
 }

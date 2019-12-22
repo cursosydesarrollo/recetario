@@ -15,8 +15,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('recetas', 'RecetaController');
+
+Route::resource('usuarios', 'UserController');
+
+Route::get('users-list', 'DataTable\UserDtController@index');
+
+Route::resource('roles', 'RolesController')->only(['index']);
+
+// conseguir lista de permisos
+Route::middleware('api')->get('permissions', 'Api\PermissionController@index');
