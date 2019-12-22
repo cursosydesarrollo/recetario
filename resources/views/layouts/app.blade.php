@@ -25,6 +25,7 @@
 
         <main class="py-4">
             @yield('breadcrumb')
+            @include('layouts.flash-message')
             @yield('content')
         </main>
     </div>
