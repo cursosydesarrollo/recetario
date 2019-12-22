@@ -78,7 +78,7 @@ class RecetaController extends Controller
         $request['user_id'] = 1;  
         $receta = Receta::create($request->all());
 
-        return redirect()->to('/recetas');
+        return redirect()->to('/recetas')->with('success','Receta Creada!');
     }
 
     /**
@@ -131,7 +131,7 @@ class RecetaController extends Controller
         }
 
         $receta->update($request->all());
-        return redirect()->to('/recetas/' . $receta->id);        
+        return redirect()->to('/recetas/' . $receta->id)->with('success','Receta Editada!');     
     }
 
     /**
@@ -143,7 +143,7 @@ class RecetaController extends Controller
     public function destroy(Receta $receta)
     {
         if($receta->delete()){
-            return redirect()->to('/recetas');
+            return redirect()->to('/recetas')->with('success','Receta eliminada!');
         }
     }
 }
