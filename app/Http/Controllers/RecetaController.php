@@ -18,7 +18,7 @@ class RecetaController extends Controller
     {
         $this->middleware('auth')->except(['index', 'show']);
         $this->middleware('verified')->except(['index', 'show']);
-        $this->middleware(['role:administrador','permission:editar recetas'])->only(['edit', 'update']);
+        $this->middleware(['role:administrador','permission:editar recetas|editar recetas propias'])->only(['edit', 'update']);
         $this->middleware(['role:administrador','permission:eliminar recetas'])->only(['destroy']);
     }
 
@@ -75,7 +75,7 @@ class RecetaController extends Controller
         }
 
         $request['imagen_url'] = $dbPath;
-        $request['user_id'] = 1;  
+        $request['user_id'] = Auth::user()->id;  
         $receta = Receta::create($request->all());
 
         return redirect()->to('/recetas')->with('success','Receta Creada!');
@@ -103,6 +103,11 @@ class RecetaController extends Controller
      */
     public function edit(Receta $receta)
     {
+
+        if (auth()->user()->cannot('edit posts'))
+            abort(404);// or some other 
+        }
+
         return view('recetas.edit', compact('receta'));
     }
 
