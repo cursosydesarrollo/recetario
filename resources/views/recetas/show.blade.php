@@ -19,13 +19,16 @@
             <div class="card ">
                 <img class="card-img-top" src="{{ $receta->imagen_url }}" alt="{{ $receta->name }}">
                 <div class="card-body">
-                    <h5 class="card-title">{{ $receta->nombre }} | {{ $receta->user_id }} | {{ Auth::user()->id }}</h5>
+                    <h5 class="card-title">{{ $receta->nombre }}</h5>
                     <p class="card-text">{{ $receta->descripcion }}</p>
                     {{-- TODO: links --}}
 
-                    @if(Auth::user()->can('editar recetas') || Auth::user()->id == $receta->user_id)
-                    <a href="{{ route('recetas.edit', $receta->id) }}" class="btn btn-warning card-link">Editar</a>
-                    @endcan
+                    @auth
+                        @if(Auth::user()->can('editar recetas') || Auth::user()->id == $receta->user_id)
+                        <a href="{{ route('recetas.edit', $receta->id) }}" class="btn btn-warning card-link">Editar</a>
+                        @endcan    
+                    @endauth
+                    
 
                     <a href="#" class="btn btn-primary">Recetas de usuario {{  $receta->usuario->name }}</a>
 
