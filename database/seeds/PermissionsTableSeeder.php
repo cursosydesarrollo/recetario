@@ -19,8 +19,9 @@ class PermissionsTableSeeder extends Seeder
         $permissions = [
             // Permisos de administrador
             'ver usuarios', 'crear usuarios', 'editar usuarios', 'suspender usuarios',
+            'editar perfil',
             'ver roles', 'crear roles', 'editar roles', 'suspender roles',
-            'crear recetas', 'editar recetas', 'eliminar recetas'
+            'crear recetas', 'editar recetas', 'eliminar recetas', 'editar recetas propias', 'eliminar recetas propias'
         ];
         
         foreach ($permissions as $permission) {

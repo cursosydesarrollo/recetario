@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Permission;
 use App\Roles;
 use Illuminate\Http\Request;
 
@@ -25,13 +26,21 @@ class RolesController extends Controller
 
     public function edit(Roles $role)
     {
-        return view('roles.edit', compact('role'));
+        $perms = Permission::all()->pluck('name', 'id');
+        return view('roles.edit', compact('role', 'perms'));
     }
     
-
+    /**
+     * Actualizar permisos de Rol
+     *
+     * @param Request $request
+     * @param Roles $role
+     * @return void
+     */
     public function update(Request $request, Roles $role)
     {
-        return redirect()->to('/roles');
+        $role->syncPermissions([$request->get('permissions')]);
+        return redirect()->to('/roles')->with('success', 'El rol a sido editado correctamente');
     }
     
 }

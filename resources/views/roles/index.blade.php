@@ -26,8 +26,8 @@
             <br>
             <div class="list-group">
                 @foreach ($roles as $rol)
-                <a href="permissions/{{ $rol->id }}"
-                    class="list-group-item list-group-item-action roles-get">{{ $rol->name }}</a>
+                <a href="{{ route('roles.edit', $rol->id) }}"
+                    class="list-group-item list-group-item-action">{{ $rol->name }}</a>
                 @endforeach
             </div>
         </div>

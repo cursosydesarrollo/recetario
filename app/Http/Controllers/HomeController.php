@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Session;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -23,6 +25,10 @@ class HomeController extends Controller
      */
     public function index()
     {
+        if(Auth::user()->email_verified_at == null){
+            Session::flash('error', 'No has verificado tu correo electronico!');
+        }
+        
         return view('home');
     }
 }
