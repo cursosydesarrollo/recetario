@@ -5,6 +5,7 @@ namespace App\Policies;
 use App\Receta;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Support\Facades\Auth;
 
 class RecetasPolicy
 {
@@ -16,9 +17,9 @@ class RecetasPolicy
      * @param  \App\User  $user
      * @return mixed
      */
-    public function viewAny(User $user)
+    public function viewAny(User $user = null)
     {
-        //
+        return true;
     }
 
     /**
@@ -28,9 +29,19 @@ class RecetasPolicy
      * @param  \App\Receta  $receta
      * @return mixed
      */
-    public function view(User $user, Receta $receta)
+    public function view(User $user = null, Receta $receta)
     {
-        //
+
+        if ($receta->published == 2) {
+            
+            if ($user->can('editar recetas no publicadas')) {
+                return true;
+            }
+
+        } else {
+            return true;
+        }
+        
     }
 
     /**
@@ -41,7 +52,9 @@ class RecetasPolicy
      */
     public function create(User $user)
     {
-        //
+        if ($user->can('crear recetas')) {
+            return true;
+        }
     }
 
     /**
@@ -53,7 +66,16 @@ class RecetasPolicy
      */
     public function update(User $user, Receta $receta)
     {
-        //
+
+        if($user->can('editar recetas propias')) {
+            return $user->id == $receta->user_id;
+        }
+
+
+        if ($user->can('editar recetas')) {
+            return true;
+        }      
+   
     }
 
     /**
@@ -65,7 +87,13 @@ class RecetasPolicy
      */
     public function delete(User $user, Receta $receta)
     {
-        //
+        if ($user->can('eliminar recetas propias')) {
+            return $user->id === $receta->user_id;
+        }
+
+        if ($user->can('delete any post')) {
+            return true;
+        }
     }
 
     /**

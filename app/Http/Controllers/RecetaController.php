@@ -18,8 +18,7 @@ class RecetaController extends Controller
     {
         $this->middleware('auth')->except(['index', 'show']);
         $this->middleware('verified')->except(['index', 'show']);
-        $this->middleware(['role:administrador','permission:editar recetas|editar recetas propias'])->only(['edit', 'update']);
-        $this->middleware(['role:administrador','permission:eliminar recetas'])->only(['destroy']);
+        $this->authorizeResource(Receta::class, 'receta');
     }
 
     /**
@@ -31,7 +30,7 @@ class RecetaController extends Controller
      */
     public function index()
     {
-        $items = Receta::orderBy('id', 'DESC')->paginate(5);
+        $items = Receta::orderBy('id', 'DESC')->published()->paginate(5);
         return view('recetas.index', compact('items'));
     }
 
@@ -75,6 +74,7 @@ class RecetaController extends Controller
         }
 
         $request['imagen_url'] = $dbPath;
+        $request['published'] = 1;
         $request['user_id'] = Auth::user()->id;  
         $receta = Receta::create($request->all());
 

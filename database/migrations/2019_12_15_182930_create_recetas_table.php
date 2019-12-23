@@ -19,7 +19,7 @@ class CreateRecetasTable extends Migration
             $table->string('nombre');
             $table->text('descripcion');
             $table->string('imagen_url')->nullable();
-            $table->boolean('published', 1);
+            $table->boolean('published');
             $table->softDeletes();
             $table->timestamps();
         });

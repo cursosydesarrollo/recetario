@@ -21,7 +21,8 @@ class PermissionsTableSeeder extends Seeder
             'ver usuarios', 'crear usuarios', 'editar usuarios', 'suspender usuarios',
             'editar perfil',
             'ver roles', 'crear roles', 'editar roles', 'suspender roles',
-            'crear recetas', 'editar recetas', 'eliminar recetas', 'editar recetas propias', 'eliminar recetas propias'
+            'crear recetas', 'editar recetas', 'eliminar recetas', 'editar recetas propias', 'eliminar recetas propias',
+            'editar recetas no publicadas'
         ];
         
         foreach ($permissions as $permission) {
