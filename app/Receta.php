@@ -15,7 +15,7 @@ class Receta extends Model
      *
      * @var array
      */
-    protected $fillable = ['nombre', 'descripcion', 'user_id', 'imagen_url'];    
+    protected $fillable = ['nombre', 'descripcion', 'user_id', 'imagen_url', 'published'];    
     
     /**
      * Campos escondidos de entidad

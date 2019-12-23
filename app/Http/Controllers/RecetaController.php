@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Receta;
 use App\User;
-use Illuminate\Contracts\Cache\Store;
+use App\Receta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Contracts\Cache\Store;
 use Illuminate\Support\Facades\Storage;
 
 class RecetaController extends Controller
@@ -103,10 +103,6 @@ class RecetaController extends Controller
      */
     public function edit(Receta $receta)
     {
-
-        if (auth()->user()->cannot('edit posts'))
-            abort(404);// or some other 
-        }
 
         return view('recetas.edit', compact('receta'));
     }
