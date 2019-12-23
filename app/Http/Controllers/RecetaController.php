@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Receta;
 use App\User;
-use Illuminate\Contracts\Cache\Store;
+use App\Receta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Contracts\Cache\Store;
 use Illuminate\Support\Facades\Storage;
 
 class RecetaController extends Controller
@@ -18,8 +18,7 @@ class RecetaController extends Controller
     {
         $this->middleware('auth')->except(['index', 'show']);
         $this->middleware('verified')->except(['index', 'show']);
-        $this->middleware(['role:administrador','permission:editar recetas|editar recetas propias'])->only(['edit', 'update']);
-        $this->middleware(['role:administrador','permission:eliminar recetas'])->only(['destroy']);
+        $this->authorizeResource(Receta::class, 'receta');
     }
 
     /**
@@ -31,7 +30,7 @@ class RecetaController extends Controller
      */
     public function index()
     {
-        $items = Receta::orderBy('id', 'DESC')->paginate(5);
+        $items = Receta::orderBy('id', 'DESC')->published()->paginate(5);
         return view('recetas.index', compact('items'));
     }
 
@@ -75,6 +74,7 @@ class RecetaController extends Controller
         }
 
         $request['imagen_url'] = $dbPath;
+        $request['published'] = 1;
         $request['user_id'] = Auth::user()->id;  
         $receta = Receta::create($request->all());
 
@@ -103,10 +103,6 @@ class RecetaController extends Controller
      */
     public function edit(Receta $receta)
     {
-
-        if (auth()->user()->cannot('edit posts'))
-            abort(404);// or some other 
-        }
 
         return view('recetas.edit', compact('receta'));
     }

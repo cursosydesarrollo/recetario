@@ -12,5 +12,6 @@ $factory->define(Receta::class, function (Faker $faker) {
         'nombre' => $faker->sentence,
         'descripcion' => $faker->text(300),
         'user_id' => factory(User::class)->create()->id,
+        'published' => rand(1,2),
     ];
 });

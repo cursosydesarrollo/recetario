@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Receta;
 use App\Roles;
 use App\User;
 use Carbon\Carbon;
@@ -15,10 +16,7 @@ class UserController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('verified');   
-        $this->middleware(['role:administrador','permission:ver usuarios'])->only(['show', 'index']);
-        $this->middleware(['role:administrador','permission:crear usuarios'])->only(['create', 'store']);
-        $this->middleware(['role:administrador','permission:editar usuarios'])->only(['edit', 'update']);
-        $this->middleware(['role:administrador','permission:suspender usuarios'])->only(['destroy']);
+        $this->authorizeResource(User::class, 'usuario');
         
     }
 
@@ -140,8 +138,13 @@ class UserController extends Controller
      */
     public function destroy(User $usuario)
     {
+        
+        foreach($usuario->recetas as $receta){
+            $receta->update(['user_id' => 1]);
+        }
+        
         if($usuario->delete()){
-            return redirect()->to('/usuarios');
+            return redirect()->to('/usuarios')->with('success', 'El usuario a sido suspendido correctamente');
         }
     }
 }
